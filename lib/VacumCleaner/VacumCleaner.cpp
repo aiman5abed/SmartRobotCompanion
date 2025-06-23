@@ -1,17 +1,17 @@
-#include "VacuumCleaner.h"
+#include "VacumCleaner.h"
 
-VacuumCleaner::VacuumCleaner(House* h, int startX, int startY, int startYaw)
+VacumCleaner::VacumCleaner(House* h, int startX, int startY, int startYaw)
     : house(h), x(startX), y(startY), yaw(startYaw), batteryLevel(MAX_BATTERY) {}
 
-std::pair<int, int> VacuumCleaner::getPosition() const {
+std::pair<int, int> VacumCleaner::getPosition() const {
     return {x, y};
 }
 
-int VacuumCleaner::getYaw() const {
+int VaumCleaner::getYaw() const {
     return yaw;
 }
 
-bool VacuumCleaner::moveForward() {
+bool VacumCleaner::moveForward() {
     if (batteryLevel < MOVE_BATTERY_COST) return false;
     int dx = 0, dy = 0;
     switch (yaw) {
@@ -29,28 +29,28 @@ bool VacuumCleaner::moveForward() {
     return true;
 }
 
-void VacuumCleaner::rotateLeft() {
+void VacumCleaner::rotateLeft() {
     if (batteryLevel < ROTATE_BATTERY_COST) return;
     yaw = (yaw + 270) % 360;
     batteryLevel -= ROTATE_BATTERY_COST;
 }
 
-void VacuumCleaner::rotateRight() {
+void VacumCleaner::rotateRight() {
     if (batteryLevel < ROTATE_BATTERY_COST) return;
     yaw = (yaw + 90) % 360;
     batteryLevel -= ROTATE_BATTERY_COST;
 }
 
-void VacuumCleaner::clean() {
+void VacumCleaner::clean() {
     if (batteryLevel < CLEAN_BATTERY_COST) return;
     house->resetDirt(x, y);
     batteryLevel -= CLEAN_BATTERY_COST;
 }
 
-float VacuumCleaner::getBatteryLevel() const {
+float VacumCleaner::getBatteryLevel() const {
     return batteryLevel;
 }
 
-void VacuumCleaner::recharge() {
+void VacumCleaner::recharge() {
     batteryLevel = MAX_BATTERY;
 }
